@@ -1,0 +1,44 @@
+import Button from '@mui/material/Button';
+interface DashboardBoxProps {
+  color?: [string, string];
+  grow?: boolean;
+  icon?: React.ReactNode;
+}
+
+const DashboardBox = (props: DashboardBoxProps) => {
+
+  return (
+    <>
+      <Button 
+        className="dashboardBox" 
+        style={{
+          backgroundImage: `linear-gradient(to right, ${props.color?.[0]}, ${props.color?.[1]})`
+        }}
+      >
+
+        <div className="d-flex w-100">
+          <div className="col1 mb-0">
+            <h4 className='text-white'>Projets Totaux</h4>
+            <span className='text-white'>42</span>
+          </div>
+
+          <div className="ms-auto">
+            <div className="icon">
+              {props.icon}
+            </div>
+          </div>
+        </div>
+
+        <div className="align-items-center w-100 bottomEle">
+          <div className="flex items-center justify-between text-gray-100">
+              <span>En cours: 24</span>
+              <span>Terminés: 12</span>
+              <span>En attente: 6</span>
+          </div>
+      </div>
+      </Button>
+    </>
+  )
+}
+
+export default DashboardBox

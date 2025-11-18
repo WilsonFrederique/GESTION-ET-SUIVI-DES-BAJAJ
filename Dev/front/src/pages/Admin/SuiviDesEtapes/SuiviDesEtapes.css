@@ -1,0 +1,1307 @@
+/* ===== STYLES SPÉCIFIQUES À LA PAGE SUIVI DES ÉTAPES ===== */
+.suivi-etapes-container {
+  font-family: "Open Sans", sans-serif;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* Mode sombre */
+body.dark .suivi-etapes-container {
+  background: #0a1429;
+}
+
+/* En-tête de page */
+.suivi-etapes-container .header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 20px !important;
+  margin-bottom: 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark .suivi-etapes-container .header-card {
+  background: linear-gradient(135deg, #1a2b4c 0%, #15243d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.suivi-etapes-container .header-title h5 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem !important;
+}
+
+body.dark .suivi-etapes-container .header-title h5 {
+  background: linear-gradient(135deg, #f1f5f9 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.suivi-etapes-container .header-title .subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+body.dark .suivi-etapes-container .header-title .subtitle {
+  color: #94a3b8;
+}
+
+/* Statistiques */
+.suivi-etapes-container .stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.suivi-etapes-container .stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.suivi-etapes-container .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+body.dark .suivi-etapes-container .stat-card {
+  background: linear-gradient(135deg, #1a2b4c 0%, #15243d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.suivi-etapes-container .stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.suivi-etapes-container .stat-icon.total { background: rgba(139, 92, 246, 0.1); }
+.suivi-etapes-container .stat-icon.completed { background: rgba(16, 185, 129, 0.1); }
+.suivi-etapes-container .stat-icon.delayed { background: rgba(245, 158, 11, 0.1); }
+.suivi-etapes-container .stat-icon.progress { background: rgba(236, 72, 153, 0.1); }
+
+.suivi-etapes-container .stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.suivi-etapes-container .stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1;
+}
+
+body.dark .suivi-etapes-container .stat-number {
+  color: #f1f5f9;
+}
+
+.suivi-etapes-container .stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+body.dark .suivi-etapes-container .stat-label {
+  color: #94a3b8;
+}
+
+/* Conteneur d'actions et recherche */
+.suivi-etapes-container .etapes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Barre de recherche */
+.suivi-etapes-container .search-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.suivi-etapes-container .search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+}
+
+.suivi-etapes-container .search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 1.25rem;
+  color: #64748b;
+  z-index: 2;
+}
+
+body.dark .suivi-etapes-container .search-icon {
+  color: #94a3b8;
+}
+
+.suivi-etapes-container .search-input {
+  width: 100%;
+  padding: 12px 20px 12px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.suivi-etapes-container .search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+body.dark .suivi-etapes-container .search-input {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark .suivi-etapes-container .search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Filtres */
+.suivi-etapes-container .filters-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.suivi-etapes-container .mobile-filter-btn {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.suivi-etapes-container .filter-groups {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.suivi-etapes-container .filter-group select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+.suivi-etapes-container .filter-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body.dark .suivi-etapes-container .filter-group select {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%2394a3b8' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+}
+
+/* Boutons */
+.suivi-etapes-container .btn-add-etape {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0858f7 0%, #00c49f 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(8, 88, 247, 0.3);
+}
+
+.suivi-etapes-container .btn-add-etape:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(8, 88, 247, 0.4);
+  background: linear-gradient(135deg, #074cdb 0%, #00a382 100%);
+}
+
+/* Carte d'étape */
+.suivi-etapes-container .etape-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.suivi-etapes-container .etape-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.suivi-etapes-container .etape-card.en_retard {
+  border-left: 4px solid #ef4444;
+}
+
+.suivi-etapes-container .etape-card.en_cours {
+  border-left: 4px solid #3b82f6;
+}
+
+.suivi-etapes-container .etape-card.termine {
+  border-left: 4px solid #10b981;
+}
+
+.suivi-etapes-container .etape-card.a_venir {
+  border-left: 4px solid #6b7280;
+}
+
+body.dark .suivi-etapes-container .etape-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* En-tête de l'étape */
+.suivi-etapes-container .etape-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.suivi-etapes-container .etape-main-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+}
+
+.suivi-etapes-container .etape-order {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.suivi-etapes-container .etape-title-section {
+  flex: 1;
+}
+
+.suivi-etapes-container .etape-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+body.dark .suivi-etapes-container .etape-title {
+  color: #f1f5f9;
+}
+
+.suivi-etapes-container .etape-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Badge de statut */
+.suivi-etapes-container .statut-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.suivi-etapes-container .statut-icon {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.suivi-etapes-container .retard-indicator {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+}
+
+/* Info responsable et coût */
+.suivi-etapes-container .responsable-info,
+.suivi-etapes-container .cout-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f1f5f9;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+body.dark .suivi-etapes-container .responsable-info,
+body.dark .suivi-etapes-container .cout-info {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+/* Contrôles de l'étape */
+.suivi-etapes-container .etape-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.suivi-etapes-container .progression-section {
+  min-width: 150px;
+}
+
+.suivi-etapes-container .progression-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+body.dark .suivi-etapes-container .progression-header {
+  color: #cbd5e1;
+}
+
+.suivi-etapes-container .progression-value {
+  font-weight: 800;
+  color: #1e293b;
+}
+
+body.dark .suivi-etapes-container .progression-value {
+  color: #f1f5f9;
+}
+
+/* Boutons d'action - NOUVEAUX STYLES POUR MODIFIER/SUPPRIMER */
+.suivi-etapes-container .action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.suivi-etapes-container .btn-action {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.suivi-etapes-container .btn-action.complete {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.suivi-etapes-container .btn-action.edit {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.suivi-etapes-container .btn-action.delete {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.suivi-etapes-container .btn-action.expand {
+  color: #6b7280;
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.suivi-etapes-container .btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.suivi-etapes-container .btn-action.complete:hover {
+  background: #10b981;
+  color: white;
+}
+
+.suivi-etapes-container .btn-action.edit:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.suivi-etapes-container .btn-action.delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.suivi-etapes-container .btn-action.expand:hover {
+  background: #6b7280;
+  color: white;
+}
+
+/* Détails de l'étape (expandable) */
+.suivi-etapes-container .etape-details {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  animation: slideDown 0.3s ease;
+}
+
+body.dark .suivi-etapes-container .etape-details {
+  border-top-color: #334155;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.suivi-etapes-container .details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.suivi-etapes-container .detail-section h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+body.dark .suivi-etapes-container .detail-section h5 {
+  color: #f1f5f9;
+}
+
+.suivi-etapes-container .detail-section p {
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+body.dark .suivi-etapes-container .detail-section p {
+  color: #94a3b8;
+}
+
+/* Planning dates */
+.suivi-etapes-container .planning-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.suivi-etapes-container .date-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+body.dark .suivi-etapes-container .date-item {
+  background: #334155;
+}
+
+.suivi-etapes-container .date-item label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+body.dark .suivi-etapes-container .date-item label {
+  color: #cbd5e1;
+}
+
+.suivi-etapes-container .date-item span {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+body.dark .suivi-etapes-container .date-item span {
+  color: #f1f5f9;
+}
+
+/* Budget info */
+.suivi-etapes-container .budget-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.suivi-etapes-container .budget-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+body.dark .suivi-etapes-container .budget-item {
+  background: #334155;
+}
+
+.suivi-etapes-container .budget-item label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+.suivi-etapes-container .budget-item span {
+  font-weight: 700;
+}
+
+.suivi-etapes-container .over-budget {
+  color: #ef4444 !important;
+}
+
+.suivi-etapes-container .under-budget {
+  color: #10b981 !important;
+}
+
+/* Validation section */
+.suivi-etapes-container .validation-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+body.dark .suivi-etapes-container .validation-section {
+  background: #334155;
+}
+
+.suivi-etapes-container .validation-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+}
+
+.suivi-etapes-container .validation-status.validated {
+  color: #10b981;
+}
+
+.suivi-etapes-container .validation-status.pending {
+  color: #f59e0b;
+}
+
+/* NOUVEAU : Dialogue de suppression */
+.suivi-etapes-container .delete-dialog .MuiDialog-paper {
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .suivi-etapes-container .delete-dialog .MuiDialog-paper {
+  background: #1e293b;
+}
+
+.suivi-etapes-container .dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-weight: 800;
+  color: #ef4444;
+  font-size: 1.25rem;
+}
+
+.suivi-etapes-container .dialog-icon {
+  font-size: 1.5rem;
+}
+
+.suivi-etapes-container .dialog-content {
+  padding: 1rem 1.5rem;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+body.dark .suivi-etapes-container .dialog-content {
+  color: #94a3b8;
+}
+
+.suivi-etapes-container .warning-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.suivi-etapes-container .dialog-actions {
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.suivi-etapes-container .dialog-actions .btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.suivi-etapes-container .dialog-actions .btn-cancel {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.suivi-etapes-container .dialog-actions .btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+.suivi-etapes-container .dialog-actions .btn-delete-confirm {
+  background: #ef4444;
+  color: white;
+}
+
+.suivi-etapes-container .dialog-actions .btn-delete-confirm:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+body.dark .suivi-etapes-container .dialog-actions .btn-cancel {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.dark .suivi-etapes-container .dialog-actions .btn-cancel:hover {
+  background: #475569;
+}
+
+/* Aucun résultat */
+.suivi-etapes-container .no-results {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.suivi-etapes-container .no-results-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.suivi-etapes-container .no-results p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.suivi-etapes-container .no-results small {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+body.dark .suivi-etapes-container .no-results {
+  color: #94a3b8;
+}
+
+/* Notification */
+.suivi-etapes-container .snackbar-alert {
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+/* ===== RESPONSIVE DESIGN ULTRA MODERNE ===== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+  .suivi-etapes-container .details-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .suivi-etapes-container .etape-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .suivi-etapes-container .etape-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .suivi-etapes-container .action-buttons {
+    gap: 0.25rem;
+  }
+}
+
+/* Mobiles - Design ultra-responsive */
+@media (max-width: 768px) {
+  .suivi-etapes-container .right-content {
+    padding: 84px 15px 15px;
+  }
+  
+  .suivi-etapes-container .header-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .suivi-etapes-container .header-controls {
+    width: 100%;
+  }
+  
+  .suivi-etapes-container .etapes-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .suivi-etapes-container .search-container {
+    min-width: 100%;
+  }
+  
+  .suivi-etapes-container .search-box {
+    max-width: 100%;
+  }
+  
+  .suivi-etapes-container .filters-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .suivi-etapes-container .mobile-filter-btn {
+    display: flex;
+  }
+  
+  .suivi-etapes-container .filter-groups {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .suivi-etapes-container .filter-groups.mobile-open {
+    display: flex;
+  }
+  
+  .suivi-etapes-container .filter-group {
+    width: 100%;
+  }
+  
+  .suivi-etapes-container .filter-group select {
+    width: 100%;
+  }
+  
+  .suivi-etapes-container .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .suivi-etapes-container .etape-main-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .suivi-etapes-container .etape-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .suivi-etapes-container .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .suivi-etapes-container .etape-controls {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .suivi-etapes-container .progression-section {
+    min-width: auto;
+  }
+  
+  .suivi-etapes-container .action-buttons {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .suivi-etapes-container .dialog-actions {
+    flex-direction: column;
+  }
+  
+  .suivi-etapes-container .dialog-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+  .suivi-etapes-container .right-content {
+    padding: 84px 10px 10px;
+  }
+  
+  .suivi-etapes-container .card {
+    border-radius: 16px !important;
+    margin: 0.5rem 0;
+  }
+  
+  .suivi-etapes-container .header-title h5 {
+    font-size: 1.5rem;
+  }
+  
+  .suivi-etapes-container .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .suivi-etapes-container .stat-card {
+    padding: 1rem;
+  }
+  
+  .suivi-etapes-container .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+  
+  .suivi-etapes-container .stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .suivi-etapes-container .etape-card {
+    padding: 1rem;
+  }
+  
+  .suivi-etapes-container .etape-title {
+    font-size: 1.1rem;
+  }
+  
+  .suivi-etapes-container .btn-action {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  
+  .suivi-etapes-container .action-buttons {
+    gap: 0.25rem;
+  }
+}
+
+/* Animation pour le chargement */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suivi-etapes-container .etape-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.suivi-etapes-container .etape-card:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.suivi-etapes-container .etape-card:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+/* Scrollbar personnalisée */
+.suivi-etapes-container .etapes-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.suivi-etapes-container .etapes-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.suivi-etapes-container .etapes-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.suivi-etapes-container .etapes-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+body.dark .suivi-etapes-container .etapes-list::-webkit-scrollbar-track {
+  background: #334155;
+}
+
+body.dark .suivi-etapes-container .etapes-list::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+body.dark .suivi-etapes-container .etapes-list::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+
+
+
+/* ===== MODAL DE CONFIRMATION DE SUPPRESSION ===== */
+
+/* Overlay de la modal */
+.suivi-etapes-container .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container de la modal */
+.suivi-etapes-container .modal-container {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+body.dark .suivi-etapes-container .modal-container {
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+/* En-tête de la modal */
+.suivi-etapes-container .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.dark .suivi-etapes-container .modal-header {
+  border-bottom-color: #334155;
+}
+
+.suivi-etapes-container .modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.suivi-etapes-container .modal-title-icon {
+  font-size: 1.5rem;
+  color: #ef4444;
+}
+
+.suivi-etapes-container .modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+body.dark .suivi-etapes-container .modal-header h3 {
+  color: #f1f5f9;
+}
+
+.suivi-etapes-container .modal-close-btn {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.suivi-etapes-container .modal-close-btn:hover {
+  background: #e2e8f0;
+  color: #374151;
+}
+
+body.dark .suivi-etapes-container .modal-close-btn {
+  background: #334155;
+  color: #94a3b8;
+}
+
+body.dark .suivi-etapes-container .modal-close-btn:hover {
+  background: #475569;
+  color: #cbd5e1;
+}
+
+/* Contenu de la modal */
+.suivi-etapes-container .modal-content {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.suivi-etapes-container .warning-icon {
+  font-size: 4rem;
+  color: #ef4444;
+  margin-bottom: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.suivi-etapes-container .modal-message p {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+body.dark .suivi-etapes-container .modal-message p {
+  color: #cbd5e1;
+}
+
+.suivi-etapes-container .modal-message strong {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+body.dark .suivi-etapes-container .modal-message strong {
+  color: #f1f5f9;
+}
+
+.suivi-etapes-container .warning-text {
+  color: #ef4444 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: rgba(239, 68, 68, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  margin-top: 1rem !important;
+}
+
+/* Actions de la modal */
+.suivi-etapes-container .modal-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+body.dark .suivi-etapes-container .modal-actions {
+  border-top-color: #334155;
+}
+
+.suivi-etapes-container .btn-modal {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.suivi-etapes-container .btn-modal.btn-cancel {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.suivi-etapes-container .btn-modal.btn-cancel:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.suivi-etapes-container .btn-modal.btn-delete {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.suivi-etapes-container .btn-modal.btn-delete:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+body.dark .suivi-etapes-container .btn-modal.btn-cancel {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.dark .suivi-etapes-container .btn-modal.btn-cancel:hover {
+  background: #475569;
+}
+
+/* Responsive pour la modal */
+@media (max-width: 768px) {
+  .suivi-etapes-container .modal-container {
+    max-width: 100%;
+    margin: 20px;
+  }
+  
+  .suivi-etapes-container .modal-actions {
+    flex-direction: column;
+  }
+  
+  .suivi-etapes-container .btn-modal {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .suivi-etapes-container .modal-header {
+    padding: 1rem 1rem 0.5rem;
+  }
+  
+  .suivi-etapes-container .modal-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .suivi-etapes-container .warning-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .suivi-etapes-container .modal-message p {
+    font-size: 1rem;
+  }
+  
+  .suivi-etapes-container .modal-actions {
+    padding: 1rem 1rem 1rem;
+  }
+}
