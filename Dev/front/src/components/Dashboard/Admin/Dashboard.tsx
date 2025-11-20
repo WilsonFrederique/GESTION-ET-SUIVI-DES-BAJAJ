@@ -24,8 +24,8 @@ import { LuUsers } from "react-icons/lu";
 import { MdWorkOutline } from "react-icons/md";
 import { CiMoneyBill } from "react-icons/ci";
 import { IoWarningOutline } from "react-icons/io5";
-import ScrollToTop from '../../../components/Helper/ScrollToTop';
-import Footer from '../../../components/Footer/Footer';
+import ScrollToTop from '../../Helper/ScrollToTop';
+import Footer from '../../Footer/Footer';
 import { Chip, emphasize, styled } from '@mui/material';
 
 // Définir StyledBreadcrumb

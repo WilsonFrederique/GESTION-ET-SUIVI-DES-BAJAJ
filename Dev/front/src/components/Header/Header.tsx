@@ -101,7 +101,7 @@ const Header = () => {
                                         paper: {
                                             elevation: 0,
                                             sx: {
-                                                overflow: 'hidden', // Empêche le menu de s'étendre en dehors
+                                                overflow: 'hidden',
                                                 filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                                 mt: 1.5,
                                                 '& .MuiAvatar-root': {
