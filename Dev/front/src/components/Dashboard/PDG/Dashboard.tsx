@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import DashboardBoxProjet from '../../../pages/PDG/Dashboard/Componets/DashboardBoxProjet';
-import DashboardBoxAlerts from '../../../pages/PDG/Dashboard/Componets/DashboardBoxAlerts';
-import DashboardBoxBudget from '../../../pages/PDG/Dashboard/Componets/DashboardBoxBudget';
-import DashboardBoxUsers from '../../../pages/PDG/Dashboard/Componets/DashboardBoxUsers';
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import HomeIcon from "@mui/icons-material/Home";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -18,12 +14,21 @@ import {
   IoTimeOutline,
   IoAlertCircleOutline,
   IoCheckmarkCircleOutline,
-  IoPlayCircleOutline
+  IoPlayCircleOutline,
+  IoBusinessOutline,
+  IoCashOutline,
+  IoCarSportOutline,
+  IoDocumentsOutline,
+  IoSettingsOutline,
+  IoAnalyticsOutline,
+  IoArrowUpOutline,
+  IoArrowDownOutline,
+  IoStatsChartOutline,
+  IoTrendingUpOutline,
+  IoWalletOutline,
+  IoPieChartOutline
 } from "react-icons/io5";
-import { LuUsers } from "react-icons/lu";
-import { MdWorkOutline } from "react-icons/md";
 import { CiMoneyBill } from "react-icons/ci";
-import { IoWarningOutline } from "react-icons/io5";
 import ScrollToTop from '../../Helper/ScrollToTop';
 import Footer from '../../Footer/Footer';
 import { Chip, emphasize, styled } from '@mui/material';
@@ -51,115 +56,115 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
 
 // Interfaces TypeScript
 interface DashboardStats {
-  totalProjets: number;
-  projetsEnCours: number;
-  projetsTermines: number;
-  projetsEnRetard: number;
-  budgetTotal: number;
-  budgetUtilise: number;
-  prestatairesActifs: number;
-  tauxCompletion: number;
+  rentabiliteGlobale: number;
+  roiParBajaj: number;
+  tauxExpansion: number;
+  tresorerie: number;
+  investissements: number;
+  margesBeneficiaires: number;
+  performanceVehicules: number;
+  tauxUtilisation: number;
+  validationsEnAttente: number;
+  budgetsApprouves: number;
+  bilanGlobal: number;
+  acquisitionsPlanifiees: number;
 }
 
-interface ProjetRecent {
+interface RapportRecent {
   id: number;
-  nom: string;
-  type: string;
-  progression: number;
-  statut: 'en_cours' | 'termine' | 'en_retard' | 'planifie';
-  dateDebut: string;
-  dateFin: string;
-  budget: number;
+  titre: string;
+  type: 'mensuel' | 'strategique' | 'compte_rendu';
+  date: string;
+  statut: 'termine' | 'en_cours' | 'en_retard';
+  auteur: string;
 }
 
 const Dashboard: React.FC = () => {
-  const [, setStats] = useState<DashboardStats>({
-    totalProjets: 0,
-    projetsEnCours: 0,
-    projetsTermines: 0,
-    projetsEnRetard: 0,
-    budgetTotal: 0,
-    budgetUtilise: 0,
-    prestatairesActifs: 0,
-    tauxCompletion: 0
+  const [stats, setStats] = useState<DashboardStats>({
+    rentabiliteGlobale: 0,
+    roiParBajaj: 0,
+    tauxExpansion: 0,
+    tresorerie: 0,
+    investissements: 0,
+    margesBeneficiaires: 0,
+    performanceVehicules: 0,
+    tauxUtilisation: 0,
+    validationsEnAttente: 0,
+    budgetsApprouves: 0,
+    bilanGlobal: 0,
+    acquisitionsPlanifiees: 0
   });
 
-  const [projetsRecents, setProjetsRecents] = useState<ProjetRecent[]>([]);
-  const [, setLoading] = useState<boolean>(true);
+  const [rapportsRecents, setRapportsRecents] = useState<RapportRecent[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // Données mock pour le dashboard
+  // Données mock pour le dashboard transport
   useEffect(() => {
     const mockStats: DashboardStats = {
-      totalProjets: 24,
-      projetsEnCours: 12,
-      projetsTermines: 8,
-      projetsEnRetard: 4,
-      budgetTotal: 1850000000,
-      budgetUtilise: 985000000,
-      prestatairesActifs: 45,
-      tauxCompletion: 68
+      rentabiliteGlobale: 24.5,
+      roiParBajaj: 18.2,
+      tauxExpansion: 12.8,
+      tresorerie: 185000000,
+      investissements: 45000000,
+      margesBeneficiaires: 32.5,
+      performanceVehicules: 87.3,
+      tauxUtilisation: 76.4,
+      validationsEnAttente: 8,
+      budgetsApprouves: 12,
+      bilanGlobal: 94.2,
+      acquisitionsPlanifiees: 15
     };
 
-    const mockProjets: ProjetRecent[] = [
+    const mockRapports: RapportRecent[] = [
       {
         id: 1,
-        nom: 'Construction École Primaire',
-        type: 'Infrastructure',
-        progression: 74,
-        statut: 'en_cours',
-        dateDebut: '2024-01-15',
-        dateFin: '2024-06-30',
-        budget: 250000000
+        titre: 'Rapport Mensuel Performance Flotte',
+        type: 'mensuel',
+        date: '2024-03-15',
+        statut: 'termine',
+        auteur: 'Directeur Général'
       },
       {
         id: 2,
-        nom: 'Formation Agricole Durable',
-        type: 'Formation',
-        progression: 85,
+        titre: 'Analyse Stratégique Expansion Régionale',
+        type: 'strategique',
+        date: '2024-03-10',
         statut: 'en_cours',
-        dateDebut: '2024-02-01',
-        dateFin: '2024-05-31',
-        budget: 75000000
+        auteur: 'Comité Stratégique'
       },
       {
         id: 3,
-        nom: 'Centre de Santé Communautaire',
-        type: 'Infrastructure',
-        progression: 100,
+        titre: 'Compte Rendu Acquisition Véhicules',
+        type: 'compte_rendu',
+        date: '2024-03-08',
         statut: 'termine',
-        dateDebut: '2023-09-01',
-        dateFin: '2024-01-31',
-        budget: 180000000
+        auteur: 'Directeur Flotte'
       },
       {
         id: 4,
-        nom: 'Programme Nutrition Infantile',
-        type: 'Social',
-        progression: 45,
+        titre: 'Rapport Financier Trimestriel',
+        type: 'mensuel',
+        date: '2024-03-05',
         statut: 'en_retard',
-        dateDebut: '2024-03-01',
-        dateFin: '2024-08-31',
-        budget: 45000000
+        auteur: 'Directeur Financier'
       },
       {
         id: 5,
-        nom: 'Intervention Urgence Inondations',
-        type: 'Urgence',
-        progression: 65,
+        titre: 'Plan d\'Investissement 2024-2025',
+        type: 'strategique',
+        date: '2024-03-01',
         statut: 'en_cours',
-        dateDebut: '2024-01-10',
-        dateFin: '2024-03-31',
-        budget: 120000000
+        auteur: 'PDG'
       }
     ];
 
     setStats(mockStats);
-    setProjetsRecents(mockProjets);
+    setRapportsRecents(mockRapports);
     setLoading(false);
   }, []);
 
-  const formatBudget = (montant: number): string => {
+  const formatMontant = (montant: number): string => {
     if (montant >= 1000000) {
       return `${(montant / 1000000).toFixed(1)}M XOF`;
     }
@@ -177,211 +182,378 @@ const Dashboard: React.FC = () => {
     });
   };
 
-  // Filtrage des projets récents
-  const projetsFiltres = projetsRecents.filter(projet =>
-    projet.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    projet.type.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtrage des rapports récents
+  const rapportsFiltres = rapportsRecents.filter(rapport =>
+    rapport.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    rapport.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    rapport.auteur.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Composant de carte de statistique
+  const StatCard = ({ 
+    title, 
+    value, 
+    icon, 
+    color = 'primary',
+    trend,
+    suffix = '',
+    prefix = '',
+    description = ''
+  }: {
+    title: string;
+    value: number | string;
+    icon: React.ReactNode;
+    color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'accent' | 'purple';
+    trend?: number;
+    suffix?: string;
+    prefix?: string;
+    description?: string;
+  }) => (
+    <div className={`stat-card ${color}`}>
+      <div className="stat-header">
+        <div className="stat-icon-wrapper">
+          {icon}
+        </div>
+        <div className="stat-trend-indicator">
+          {trend !== undefined && (
+            <span className={`trend ${trend >= 0 ? 'positive' : 'negative'}`}>
+              {trend >= 0 ? <IoArrowUpOutline /> : <IoArrowDownOutline />}
+              {Math.abs(trend)}%
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="stat-content">
+        <div className="stat-value">
+          {prefix}{value}{suffix}
+        </div>
+        <div className="stat-title">{title}</div>
+        {description && <div className="stat-description">{description}</div>}
+      </div>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div className="dashboard-loading">
+        <div className="loading-spinner"></div>
+        <p>Chargement du tableau de bord...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="dashboard-container">
-      <div className="right-content w-100">
-        {/* Header */}
-        <div className="card shadow border-0 w-100 flex-row p-4 header-card">
-          <div className="header-title">
-            <h5 className="mb-0">Tableau de Bord</h5>
-            <p className="mb-0 subtitle">Vue d'ensemble de vos projets et activités</p>
-          </div>
-          <div className="header-controls">
-            <Breadcrumbs aria-label="breadcrumb" className="ms-auto breadcrumb_">
-              <a href="/">
+    <div className="dashboard-modern">
+      <div className="dashboard-content">
+        {/* Header avec Breadcrumbs */}
+        <div className="dashboard-header">
+          <div className="header-content">
+            <div className="header-text">
+              <h1 className="dashboard-title">Tableau de Bord Stratégique</h1>
+              <p className="dashboard-subtitle">Vue d'ensemble complète des performances et indicateurs clés de votre entreprise</p>
+            </div>
+            <div className="header-breadcrumbs">
+              <Breadcrumbs aria-label="breadcrumb">
+                <a href="/">
+                  <StyledBreadcrumb
+                    component="a"
+                    label="Accueil"
+                    icon={<HomeIcon fontSize="small" />}
+                  />
+                </a>
                 <StyledBreadcrumb
-                  className="StyledBreadcrumb"
-                  component="a"
-                  label="Accueil"
-                  icon={<HomeIcon fontSize="small" />}
+                  label="Tableau de Bord PDG"
+                  icon={<ExpandMoreIcon fontSize="small" />}
                 />
-              </a>
-              <StyledBreadcrumb
-                className="StyledBreadcrumb"
-                label="Tableau de Bord"
-                icon={<ExpandMoreIcon fontSize="small" />}
+              </Breadcrumbs>
+            </div>
+          </div>
+        </div>
+
+        {/* Barre de recherche et actions rapides */}
+        <div className="dashboard-controls">
+          <div className="search-section">
+            <div className="search-wrapper">
+              <IoSearchOutline className="search-icon" />
+              <input
+                type="text"
+                placeholder="Rechercher un rapport, une analyse..."
+                className="search-input"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </Breadcrumbs>
+            </div>
+          </div>
+          <div className="actions-section">
+            <button className="action-btn primary">
+              <IoAddOutline />
+              Nouveau Rapport
+            </button>
+            <button className="action-btn secondary">
+              <IoDownloadOutline />
+              Exporter
+            </button>
+            <button className="action-btn secondary">
+              <IoRefreshOutline />
+              Actualiser
+            </button>
           </div>
         </div>
 
-        {/* Statistiques Principales */}
-        <div>
-          <div className="stats-grid">
-            <div className="">
-              <div className="dashboardBoxWrapper d-flex">
-                <DashboardBoxProjet color={["#113385","#3DA2BA"]} icon={<MdWorkOutline />} grow={true} />
-                <DashboardBoxAlerts color={["#3DA2BA","#113385"]} icon={<IoWarningOutline />} />
-                <DashboardBoxBudget color={["#3DA2BA","#0E5D61"]} icon={<CiMoneyBill />} />
-                <DashboardBoxUsers color={["#0E5D61","#3DA2BA"]} icon={<LuUsers />} />
+        {/* 📊 Section Tableau de Bord Stratégique */}
+        <section className="dashboard-section">
+          <div className="section-header">
+            <IoAnalyticsOutline className="section-icon" />
+            <h2 className="section-title">Tableau de Bord Stratégique</h2>
+          </div>
+          <div className="stats-grid-2x2">
+            <StatCard
+              title="Rentabilité Globale"
+              value={stats.rentabiliteGlobale}
+              suffix="%"
+              icon={<IoPieChartOutline />}
+              color="success"
+              trend={2.4}
+              description="Croissance trimestrielle"
+            />
+            <StatCard
+              title="ROI par Bajaj"
+              value={stats.roiParBajaj}
+              suffix="%"
+              icon={<CiMoneyBill />}
+              color="primary"
+              trend={1.2}
+              description="Retour sur investissement"
+            />
+            <StatCard
+              title="Taux d'Expansion"
+              value={stats.tauxExpansion}
+              suffix="%"
+              icon={<IoTrendingUpOutline />}
+              color="accent"
+              trend={3.1}
+              description="Nouvelles zones couvertes"
+            />
+            <StatCard
+              title="Prévisions Financières"
+              value="+15%"
+              icon={<IoStatsChartOutline />}
+              color="info"
+              trend={15}
+              description="Projection annuelle"
+            />
+          </div>
+        </section>
+
+        {/* 💰 Section Finances */}
+        <section className="dashboard-section">
+          <div className="section-header">
+            <IoCashOutline className="section-icon" />
+            <h2 className="section-title">Finances</h2>
+          </div>
+          <div className="stats-grid-2x2">
+            <StatCard
+              title="Bilan Global"
+              value={stats.bilanGlobal}
+              suffix="%"
+              icon={<IoCheckmarkCircleOutline />}
+              color="success"
+              description="Performance financière"
+            />
+            <StatCard
+              title="Trésorerie"
+              value={formatMontant(stats.tresorerie)}
+              icon={<IoWalletOutline />}
+              color="primary"
+              description="Disponibilités actuelles"
+            />
+            <StatCard
+              title="Investissements"
+              value={formatMontant(stats.investissements)}
+              icon={<IoBusinessOutline />}
+              color="info"
+              description="Capitaux engagés"
+            />
+            <StatCard
+              title="Marges Bénéficiaires"
+              value={stats.margesBeneficiaires}
+              suffix="%"
+              icon={<IoAnalyticsOutline />}
+              color="accent"
+              trend={1.8}
+              description="Profitabilité"
+            />
+          </div>
+        </section>
+
+        {/* 🚗 Section Flotte */}
+        <section className="dashboard-section">
+          <div className="section-header">
+            <IoCarSportOutline className="section-icon" />
+            <h2 className="section-title">Flotte</h2>
+          </div>
+          <div className="stats-grid-2x2">
+            <StatCard
+              title="Performance Véhicules"
+              value={stats.performanceVehicules}
+              suffix="%"
+              icon={<IoCarSportOutline />}
+              color="primary"
+              trend={2.3}
+              description="Efficacité opérationnelle"
+            />
+            <StatCard
+              title="Taux d'Utilisation"
+              value={stats.tauxUtilisation}
+              suffix="%"
+              icon={<IoTimeOutline />}
+              color="info"
+              trend={1.1}
+              description="Optimisation des ressources"
+            />
+            <StatCard
+              title="Acquisitions Planifiées"
+              value={stats.acquisitionsPlanifiees}
+              icon={<IoAddOutline />}
+              color="accent"
+              description="Nouveaux véhicules"
+            />
+            <StatCard
+              title="Maintenance"
+              value="92%"
+              icon={<IoSettingsOutline />}
+              color="success"
+              description="Taux de disponibilité"
+            />
+          </div>
+        </section>
+
+        {/* Contenu principal avec grille responsive */}
+        <div className="main-content-grid">
+          {/* 📈 Section Rapports Récents */}
+          <div className="content-column main-column">
+            <div className="content-card">
+              <div className="card-header">
+                <div className="card-title-section">
+                  <IoDocumentsOutline className="card-icon" />
+                  <h3 className="card-title">Rapports Récents</h3>
+                </div>
+                <button className="view-all-btn">
+                  Voir tout <IoEyeOutline />
+                </button>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Recherche et Actions Rapides */}
-        <div className="bgColor2 card shadow border-0 p-4 mt-4">
-          <div className="dashboard-actions">
-            <div className="search-container">
-              <div className="search-box">
-                <IoSearchOutline className="search-icon" />
-                <input
-                  type="text"
-                  placeholder="Rechercher un projet..."
-                  className="search-input"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="quick-actions">
-              <button className="btn-action primary">
-                <IoAddOutline />
-                Nouveau Projet
-              </button>
-              <button className="btn-action secondary">
-                <IoDownloadOutline />
-                Exporter
-              </button>
-              <button className="btn-action secondary">
-                <IoRefreshOutline />
-                Actualiser
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Projets Récents et Activités */}
-        <div className="content-grid">
-          {/* Projets Récents */}
-          <div className="bgColor content-card">
-            <div className="card-header">
-              <h4 className="card-title">Projets Récents</h4>
-              <button className="btn-view-all">
-                Voir tout <IoEyeOutline />
-              </button>
-            </div>
-            
-            <div className="projets-list">
-              {projetsFiltres.length > 0 ? (
-                projetsFiltres.map(projet => (
-                  <div key={projet.id} className="projet-item">
-                    <div className="projet-info">
-                      <div className="projet-main">
-                        <h5 className="projet-name">{projet.nom}</h5>
-                        <span className={`projet-status ${projet.statut}`}>
-                          {projet.statut === 'en_cours' && <IoPlayCircleOutline />}
-                          {projet.statut === 'termine' && <IoCheckmarkCircleOutline />}
-                          {projet.statut === 'en_retard' && <IoAlertCircleOutline />}
-                          {projet.statut === 'planifie' && <IoTimeOutline />}
-                          {projet.statut.replace('_', ' ')}
-                        </span>
-                      </div>
-                      <div className="projet-meta">
-                        <span className="projet-type">{projet.type}</span>
-                        <span className="projet-budget">{formatBudget(projet.budget)}</span>
-                      </div>
-                      <div className="projet-dates">
-                        <span>
+              
+              <div className="rapports-container">
+                {rapportsFiltres.length > 0 ? (
+                  rapportsFiltres.map(rapport => (
+                    <div key={rapport.id} className="rapport-card">
+                      <div className="rapport-content">
+                        <div className="rapport-header">
+                          <h4 className="rapport-title">{rapport.titre}</h4>
+                          <span className={`rapport-status ${rapport.statut}`}>
+                            {rapport.statut === 'termine' && <IoCheckmarkCircleOutline />}
+                            {rapport.statut === 'en_cours' && <IoPlayCircleOutline />}
+                            {rapport.statut === 'en_retard' && <IoAlertCircleOutline />}
+                            {rapport.statut.replace('_', ' ')}
+                          </span>
+                        </div>
+                        <div className="rapport-meta">
+                          <span className="rapport-type">
+                            {rapport.type === 'mensuel' && '📊 Mensuel PDG'}
+                            {rapport.type === 'strategique' && '🎯 Analyse Stratégique'}
+                            {rapport.type === 'compte_rendu' && '📋 Compte Rendu DG'}
+                          </span>
+                          <span className="rapport-author">Par {rapport.auteur}</span>
+                        </div>
+                        <div className="rapport-date">
                           <IoCalendarOutline />
-                          {formatDate(projet.dateDebut)} - {formatDate(projet.dateFin)}
-                        </span>
+                          {formatDate(rapport.date)}
+                        </div>
+                      </div>
+                      <div className="rapport-actions">
+                        <button className="icon-btn primary" title="Voir">
+                          <IoEyeOutline />
+                        </button>
+                        <button className="icon-btn secondary" title="Télécharger">
+                          <IoDownloadOutline />
+                        </button>
                       </div>
                     </div>
-                    
-                    <div className="projet-progress">
-                      <div className="progress-header">
-                        <span className="progress-label">Progression</span>
-                        <span className="progress-value">{projet.progression}%</span>
-                      </div>
-                      <div className="progress-bar">
-                        <div 
-                          className={`progress-fill ${projet.statut}`}
-                          style={{ width: `${projet.progression}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                  ))
+                ) : (
+                  <div className="no-results">
+                    <p>Aucun rapport trouvé pour votre recherche</p>
                   </div>
-                ))
-              ) : (
-                <div className="no-results">
-                  <p>Aucun projet trouvé</p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Activités Récentes */}
-          <div className="bgColor content-card">
-            <div className="card-header">
-              <h4 className="card-title">Activités Récentes</h4>
-            </div>
-            
-            <div className="activities-list">
-              <div className="activity-item">
-                <div className="activity-icon success">
-                  <IoCheckmarkCircleOutline />
-                </div>
-                <div className="activity-content">
-                  <p className="activity-text">
-                    <strong>Construction École Primaire</strong> a atteint 74% de progression
-                  </p>
-                  <span className="activity-time">Il y a 2 heures</span>
+          {/* ⚙️ Section Administration */}
+          <div className="content-column sidebar-column">
+            <div className="content-card">
+              <div className="card-header">
+                <div className="card-title-section">
+                  <IoSettingsOutline className="card-icon" />
+                  <h3 className="card-title">Administration</h3>
                 </div>
               </div>
+              
+              <div className="admin-container">
+                <div className="admin-item">
+                  <div className="admin-icon warning">
+                    <IoDocumentsOutline />
+                  </div>
+                  <div className="admin-content">
+                    <p className="admin-title">{stats.validationsEnAttente} validations en attente</p>
+                    <p className="admin-subtitle">Stratégies nécessitant approbation</p>
+                    <span className="admin-badge urgent">Action requise</span>
+                  </div>
+                  <button className="admin-action-btn">
+                    Vérifier
+                  </button>
+                </div>
 
-              <div className="activity-item">
-                <div className="activity-icon warning">
-                  <IoAlertCircleOutline />
+                <div className="admin-item">
+                  <div className="admin-icon success">
+                    <IoCheckmarkCircleOutline />
+                  </div>
+                  <div className="admin-content">
+                    <p className="admin-title">{stats.budgetsApprouves} budgets approuvés</p>
+                    <p className="admin-subtitle">Ce mois</p>
+                    <span className="admin-badge">Dernière approbation: Aujourd'hui</span>
+                  </div>
+                  <button className="admin-action-btn outline">
+                    Détails
+                  </button>
                 </div>
-                <div className="activity-content">
-                  <p className="activity-text">
-                    <strong>Programme Nutrition Infantile</strong> est en retard de 15 jours
-                  </p>
-                  <span className="activity-time">Il y a 5 heures</span>
-                </div>
-              </div>
 
-              <div className="activity-item">
-                <div className="activity-icon info">
-                  <IoPeopleOutline />
+                <div className="admin-item">
+                  <div className="admin-icon info">
+                    <IoPeopleOutline />
+                  </div>
+                  <div className="admin-content">
+                    <p className="admin-title">Supervision DG</p>
+                    <p className="admin-subtitle">Réunion trimestrielle programmée</p>
+                    <span className="admin-badge">15 Mars 2024</span>
+                  </div>
+                  <button className="admin-action-btn">
+                    Planifier
+                  </button>
                 </div>
-                <div className="activity-content">
-                  <p className="activity-text">
-                    Nouveau prestataire <strong>Tech Solutions</strong> ajouté
-                  </p>
-                  <span className="activity-time">Il y a 1 jour</span>
-                </div>
-              </div>
 
-              <div className="activity-item">
-                <div className="activity-icon success">
-                  <IoCheckmarkCircleOutline />
-                </div>
-                <div className="activity-content">
-                  <p className="activity-text">
-                    <strong>Centre de Santé Communautaire</strong> terminé avec succès
-                  </p>
-                  <span className="activity-time">Il y a 2 jours</span>
-                </div>
-              </div>
-
-              <div className="activity-item">
-                <div className="activity-icon primary">
-                  <IoAddOutline />
-                </div>
-                <div className="activity-content">
-                  <p className="activity-text">
-                    Nouveau projet <strong>Énergie Solaire</strong> planifié
-                  </p>
-                  <span className="activity-time">Il y a 3 jours</span>
+                <div className="admin-item">
+                  <div className="admin-icon accent">
+                    <IoAnalyticsOutline />
+                  </div>
+                  <div className="admin-content">
+                    <p className="admin-title">Rapport de performance</p>
+                    <p className="admin-subtitle">DG à examiner</p>
+                    <span className="admin-badge warning">Échéance: 20 Mars</span>
+                  </div>
+                  <button className="admin-action-btn warning">
+                    Examiner
+                  </button>
                 </div>
               </div>
             </div>
@@ -389,29 +561,44 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Indicateurs de Performance */}
-        <div className="bgColor card shadow border-0 p-4 mt-4">
-          <div className="performance-indicators">
-            <h4 className="section-title">Indicateurs de Performance</h4>
-            <div className="indicators-grid">
-              <div className="indicator-item">
-                <div className="indicator-value success">92%</div>
-                <div className="indicator-label">Satisfaction Clients</div>
+        <section className="performance-section">
+          <div className="content-card">
+            <div className="section-header">
+              <IoAnalyticsOutline className="section-icon" />
+              <h2 className="section-title">Indicateurs de Performance Stratégiques</h2>
+            </div>
+            <div className="performance-grid">
+              <div className="performance-item">
+                <div className="performance-value success">94%</div>
+                <div className="performance-label">Satisfaction Clients</div>
+                <div className="performance-trend positive">
+                  <IoArrowUpOutline /> +2.1%
+                </div>
               </div>
-              <div className="indicator-item">
-                <div className="indicator-value warning">78%</div>
-                <div className="indicator-label">Respect des Délais</div>
+              <div className="performance-item">
+                <div className="performance-value primary">88%</div>
+                <div className="performance-label">Efficacité Opérationnelle</div>
+                <div className="performance-trend positive">
+                  <IoArrowUpOutline /> +1.4%
+                </div>
               </div>
-              <div className="indicator-item">
-                <div className="indicator-value info">85%</div>
-                <div className="indicator-label">Utilisation Budget</div>
+              <div className="performance-item">
+                <div className="performance-value info">92%</div>
+                <div className="performance-label">Disponibilité Flotte</div>
+                <div className="performance-trend positive">
+                  <IoArrowUpOutline /> +0.8%
+                </div>
               </div>
-              <div className="indicator-item">
-                <div className="indicator-value primary">94%</div>
-                <div className="indicator-label">Qualité des Livrables</div>
+              <div className="performance-item">
+                <div className="performance-value accent">96%</div>
+                <div className="performance-label">Conformité Réglementaire</div>
+                <div className="performance-trend positive">
+                  <IoArrowUpOutline /> +1.2%
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <div>
           <ScrollToTop />
