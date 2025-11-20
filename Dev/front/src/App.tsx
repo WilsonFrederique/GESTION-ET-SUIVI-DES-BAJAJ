@@ -4,27 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./auth/Login";
 
-import Home from "./pages/Admin/Dashboard/DashboardIndex";
+import Home from "./pages/PDG/Dashboard/DashboardIndex";
 import Header from "./components/Header/Header";
-import SidBar from "./components/SidBar/Admin/SidBar";
+import SidBar from "./components/SidBar/PDG/SidBar";
 
-import ProjetListes from "./pages/Admin/Projets/ProjetListes";
-import FrmProjet from "./pages/Admin/Projets/FrmProjet";
-import DetailProjet from "./pages/Admin/Projets/DetailProjet";
+import ProjetListes from "./pages/PDG/Projets/ProjetListes";
+import FrmProjet from "./pages/PDG/Projets/FrmProjet";
+import DetailProjet from "./pages/PDG/Projets/DetailProjet";
 
-import BudgetVS from "./pages/Admin/Projets/BudgetVS";
-import DetailBudgetVS from "./pages/Admin/Projets/DetailBudgetVS";
+import BudgetVS from "./pages/PDG/Projets/BudgetVS";
+import DetailBudgetVS from "./pages/PDG/Projets/DetailBudgetVS";
 
-import Utilisateurs from "./pages/Admin/Utilisateurs/Utilisateurs";
-import FrmUtilisateurs from "./pages/Admin/Utilisateurs/FrmUtilisateurs";
+import Utilisateurs from "./pages/PDG/Utilisateurs/Utilisateurs";
+import FrmUtilisateurs from "./pages/PDG/Utilisateurs/FrmUtilisateurs";
 
-import ListeDesPrestataires from "./pages/Admin/ListeDesPrestataires/ListeDesPrestataires";
-import FrmDesPrestataires from "./pages/Admin/ListeDesPrestataires/FrmDesPrestataires";
-import DetailPrestataires from "./pages/Admin/ListeDesPrestataires/DetailPrestataires";
-import EvaluationPrestataire from "./pages/Admin/ListeDesPrestataires/EvaluationPrestataire";
-import SuiviDesPrestataires from "./pages/Admin/ListeDesPrestataires/SuiviDesPrestataires";
+import ListeDesPrestataires from "./pages/PDG/ListeDesPrestataires/ListeDesPrestataires";
+import FrmDesPrestataires from "./pages/PDG/ListeDesPrestataires/FrmDesPrestataires";
+import DetailPrestataires from "./pages/PDG/ListeDesPrestataires/DetailPrestataires";
+import EvaluationPrestataire from "./pages/PDG/ListeDesPrestataires/EvaluationPrestataire";
+import SuiviDesPrestataires from "./pages/PDG/ListeDesPrestataires/SuiviDesPrestataires";
 
-import Notifications from "./pages/Admin/Notifications/Notifications";
+import Notifications from "./pages/PDG/Notifications/Notifications";
 
 const MyContext = createContext();
 

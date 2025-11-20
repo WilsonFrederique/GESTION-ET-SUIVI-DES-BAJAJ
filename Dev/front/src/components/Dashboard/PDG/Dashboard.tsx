@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import DashboardBoxProjet from '../../../pages/Admin/Dashboard/Componets/DashboardBoxProjet';
-import DashboardBoxAlerts from '../../../pages/Admin/Dashboard/Componets/DashboardBoxAlerts';
-import DashboardBoxBudget from '../../../pages/Admin/Dashboard/Componets/DashboardBoxBudget';
-import DashboardBoxUsers from '../../../pages/Admin/Dashboard/Componets/DashboardBoxUsers';
+import DashboardBoxProjet from '../../../pages/PDG/Dashboard/Componets/DashboardBoxProjet';
+import DashboardBoxAlerts from '../../../pages/PDG/Dashboard/Componets/DashboardBoxAlerts';
+import DashboardBoxBudget from '../../../pages/PDG/Dashboard/Componets/DashboardBoxBudget';
+import DashboardBoxUsers from '../../../pages/PDG/Dashboard/Componets/DashboardBoxUsers';
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import HomeIcon from "@mui/icons-material/Home";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

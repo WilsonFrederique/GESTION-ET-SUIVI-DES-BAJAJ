@@ -1,4 +1,4 @@
-import Dashboard from "../../../components/Dashboard/Admin/Dashboard"
+import Dashboard from "../../../components/Dashboard/PDG/Dashboard"
 
 const Home = () => {
   return (
