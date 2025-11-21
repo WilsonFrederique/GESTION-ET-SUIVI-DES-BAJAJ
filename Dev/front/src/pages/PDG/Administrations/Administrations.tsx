@@ -196,39 +196,34 @@ const Administrations: React.FC = () => {
             <div className="right-content w-100">
                 {/* Header avec Breadcrumbs */}
                 <div className="administration-header">
-                <div className="header-content">
-                    <div className="header-text">
-                    <div className="header-title-content">
-                        <h1 className="dashboard-title">
-                        Aperçu de l’<span className="highlight">Administration</span>
-                        </h1>
-                        <p className="dashboard-subtitle">
-                        Gestion et analyse complète des activités administratives de votre entreprise
-                        </p>
+                    <div className="header-content">
+                        <div className="header-text">
+                            <div className="header-title-content">
+                                <h1 className="dashboard-title">
+                                Aperçu de l’<span className="highlight">Administration</span>
+                                </h1>
+                                <p className="dashboard-subtitle">
+                                Gestion et analyse complète des activités administratives de votre entreprise
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                    <div className="header-actions">
-                    <button className="header-action-btn">
-                        <IoMenuOutline />
-                    </button>
-                    </div>
-                </div>
-                
-                <div className="header-breadcrumbs">
-                    <Breadcrumbs aria-label="breadcrumb">
-                    <a href="/">
+                    
+                    <div className="header-breadcrumbs">
+                        <Breadcrumbs aria-label="breadcrumb">
+                        <a href="/">
+                            <StyledBreadcrumb
+                            component="a"
+                            label="Accueil"
+                            icon={<HomeIcon fontSize="small" />}
+                            />
+                        </a>
                         <StyledBreadcrumb
-                        component="a"
-                        label="Accueil"
-                        icon={<HomeIcon fontSize="small" />}
+                            label="Finances"
+                            icon={<ExpandMoreIcon fontSize="small" />}
                         />
-                    </a>
-                    <StyledBreadcrumb
-                        label="Finances"
-                        icon={<ExpandMoreIcon fontSize="small" />}
-                    />
-                    </Breadcrumbs>
-                </div>
+                        </Breadcrumbs>
+                    </div>
                 </div>
 
                 {/* Mobile Menu */}

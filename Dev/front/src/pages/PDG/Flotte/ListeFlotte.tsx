@@ -394,11 +394,6 @@ const ListeFlotte: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="header-actions">
-              <button className="header-action-btn">
-                <IoMenuOutline />
-              </button>
-            </div>
           </div>
           
           <div className="header-breadcrumbs">

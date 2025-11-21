@@ -336,38 +336,34 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-modern">
       <div className="dashboard-content">
-        {/* Header avec Breadcrumbs */}
-        <div className="dashboard-header">
+        <div className="header administration-header">
           <div className="header-content">
-            <div className="header-text">
-              <h1 className="dashboard-title">
-                Tableau de Bord <span className="highlight">Stratégique</span>
-              </h1>
-              <p className="dashboard-subtitle">
-                Vue d'ensemble en temps réel des performances et indicateurs clés de votre entreprise
-              </p>
-            </div>
-            <div className="header-actions">
-              <button className="header-action-btn">
-                <IoMenuOutline />
-              </button>
-            </div>
+              <div className="header-text">
+                <div className="header-title-content">
+                    <h1 className="dashboard-title">
+                    Tableau de Bord <span className="highlight">Stratégique</span>
+                    </h1>
+                    <p className="dashboard-subtitle">
+                      Vue d'ensemble en temps réel des performances et indicateurs clés de votre entreprise
+                    </p>
+                </div>
+              </div>
           </div>
           
           <div className="header-breadcrumbs">
-            <Breadcrumbs aria-label="breadcrumb">
+              <Breadcrumbs aria-label="breadcrumb">
               <a href="/">
-                <StyledBreadcrumb
+                  <StyledBreadcrumb
                   component="a"
                   label="Accueil"
                   icon={<HomeIcon fontSize="small" />}
-                />
+                  />
               </a>
               <StyledBreadcrumb
-                label="Tableau de Bord PDG"
-                icon={<ExpandMoreIcon fontSize="small" />}
+                  label="Finances"
+                  icon={<ExpandMoreIcon fontSize="small" />}
               />
-            </Breadcrumbs>
+              </Breadcrumbs>
           </div>
         </div>
 
@@ -432,7 +428,7 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
 
-        {/* 📊 Section KPI Principaux */}
+        {/* Section KPI Principaux */}
         <section className="dashboard-section">
           <div className="section-header">
             <div className="section-title-wrapper">

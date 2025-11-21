@@ -1,0 +1,1076 @@
+/* Rapports.css - Styles spécifiques à la page Rapports */
+
+.moderne-rapports-container {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 20px;
+}
+
+body.dark .moderne-rapports-container {
+    background: #071739;
+}
+
+/* Header Card */
+.moderne-header-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.moderne-header-card h5 {
+    color: white !important;
+    font-weight: 600;
+}
+
+.moderne-header-title p {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark .moderne-header-card {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+}
+
+/* Stats Grid */
+.moderne-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.moderne-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.moderne-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.moderne-stat-card.revenue {
+    border-left-color: #10b981;
+}
+
+.moderne-stat-card.expense {
+    border-left-color: #ef4444;
+}
+
+.moderne-stat-card.profit {
+    border-left-color: #3b82f6;
+}
+
+.moderne-stat-card.vehicles {
+    border-left-color: #8b5cf6;
+}
+
+.moderne-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.moderne-stat-card.revenue .moderne-stat-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.moderne-stat-card.expense .moderne-stat-icon {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.moderne-stat-card.profit .moderne-stat-icon {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.moderne-stat-card.vehicles .moderne-stat-icon {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.moderne-stat-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #1f2937;
+}
+
+.moderne-stat-content p {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+body.dark .moderne-stat-card {
+    background: #1e293b;
+}
+
+body.dark .moderne-stat-content h3 {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-stat-content p {
+    color: #94a3b8;
+}
+
+/* Search and Filter */
+.moderne-search-filter-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.moderne-search-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.moderne-search-form {
+    position: relative;
+    width: 100%;
+}
+
+.moderne-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.moderne-search-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.moderne-search-button {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.moderne-search-icon {
+    font-size: 1.125rem;
+}
+
+.moderne-filter-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.875rem;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+body.dark .moderne-search-input,
+body.dark .moderne-filter-select {
+    background: #1e293b;
+    border-color: #374151;
+    color: #f1f5f9;
+}
+
+body.dark .moderne-search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Rapports Header */
+.moderne-rapports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.moderne-rapports-header h6 {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.moderne-rapports-count {
+    font-size: 0.875rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+body.dark .moderne-rapports-header h6 {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-rapports-count {
+    background: #374151;
+    color: #d1d5db;
+}
+
+/* Rapports List */
+.moderne-rapports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.moderne-rapport-card2 {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.moderne-rapport-card2:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.moderne-rapport-main {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.moderne-rapport-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 100px;
+}
+
+.moderne-rapport-type-icon {
+    font-size: 2rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+}
+
+.moderne-rapport-type-icon.mensuel {
+    color: #10b981;
+    background: #ecfdf5;
+}
+
+.moderne-rapport-type-icon.strategique {
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+.moderne-rapport-type-icon.compte-rendu {
+    color: #8b5cf6;
+    background: #faf5ff;
+}
+
+.moderne-type-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #374151;
+}
+
+.moderne-statut-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.moderne-statut-complet {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.moderne-statut-partiel {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.moderne-statut-en-cours {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.moderne-rapport-info {
+    flex: 1;
+}
+
+.moderne-rapport-titre {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.moderne-rapport-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.moderne-rapport-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.moderne-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.moderne-meta-icon {
+    font-size: 0.875rem;
+}
+
+.moderne-rapport-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.moderne-btn-action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.moderne-btn-action.view {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.moderne-btn-action.download {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+}
+
+.moderne-btn-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .moderne-rapport-card2 {
+    background: #1e293b;
+    border-color: #374151;
+}
+
+body.dark .moderne-rapport-titre {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-rapport-description {
+    color: #94a3b8;
+}
+
+body.dark .moderne-type-label {
+    color: #d1d5db;
+}
+
+body.dark .moderne-rapport-type-icon.mensuel {
+    background: #064e3b;
+}
+
+body.dark .moderne-rapport-type-icon.strategique {
+    background: #1e3a8a;
+}
+
+body.dark .moderne-rapport-type-icon.compte-rendu {
+    background: #5b21b6;
+}
+
+body.dark .moderne-btn-action {
+    background: #374151;
+    color: #d1d5db;
+    border-color: #4b5563;
+}
+
+/* No Results */
+.moderne-no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+}
+
+.moderne-no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+body.dark .moderne-no-results {
+    color: #94a3b8;
+}
+
+/* Modal */
+.moderne-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.moderne-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.moderne-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.moderne-modal-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.moderne-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moderne-close-btn:hover {
+    color: #374151;
+}
+
+.moderne-modal-body {
+    padding: 1.5rem;
+}
+
+.moderne-modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.moderne-btn-primary, .moderne-btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.moderne-btn-primary {
+    background: #3b82f6;
+    color: white;
+}
+
+.moderne-btn-secondary {
+    background: #6b7280;
+    color: white;
+}
+
+.moderne-btn-primary:hover, .moderne-btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .moderne-modal-content {
+    background: #1e293b;
+}
+
+body.dark .moderne-modal-header {
+    border-bottom-color: #374151;
+}
+
+body.dark .moderne-modal-header h5 {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-close-btn {
+    color: #94a3b8;
+}
+
+body.dark .moderne-close-btn:hover {
+    color: #d1d5db;
+}
+
+body.dark .moderne-modal-footer {
+    border-top-color: #374151;
+}
+
+/* Detail Sections */
+.moderne-detail-section {
+    margin-bottom: 2rem;
+}
+
+.moderne-detail-section h6 {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.moderne-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.moderne-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.moderne-detail-label {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.moderne-detail-value {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.moderne-financial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.moderne-financial-item {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.moderne-financial-item.revenue {
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+}
+
+.moderne-financial-item.expense {
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+}
+
+.moderne-financial-item.profit {
+    background: #eff6ff;
+    border: 1px solid #3b82f6;
+}
+
+.moderne-financial-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.moderne-financial-value {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.moderne-financial-item.revenue .moderne-financial-value {
+    color: #10b981;
+}
+
+.moderne-financial-item.expense .moderne-financial-value {
+    color: #ef4444;
+}
+
+.moderne-financial-item.profit .moderne-financial-value {
+    color: #3b82f6;
+}
+
+.moderne-fleet-info {
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.moderne-fleet-count {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+body.dark .moderne-detail-section h6 {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-detail-item {
+    border-bottom-color: #374151;
+}
+
+body.dark .moderne-detail-label {
+    color: #94a3b8;
+}
+
+body.dark .moderne-detail-value {
+    color: #f1f5f9;
+}
+
+body.dark .moderne-financial-item.revenue {
+    background: #064e3b;
+    border-color: #10b981;
+}
+
+body.dark .moderne-financial-item.expense {
+    background: #7f1d1d;
+    border-color: #ef4444;
+}
+
+body.dark .moderne-financial-item.profit {
+    background: #1e3a8a;
+    border-color: #3b82f6;
+}
+
+body.dark .moderne-fleet-info {
+    background: #374151;
+}
+
+body.dark .moderne-fleet-count {
+    color: #f1f5f9;
+}
+
+/* Header Finances spécifique */
+.moderne-administration-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  animation: slideInUp 0.6s ease-out;
+}
+
+body.dark .moderne-administration-header {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.moderne-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.moderne-header-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.moderne-btn-back-header {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 2px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.moderne-btn-back-header:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .moderne-btn-back-header {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.moderne-header-title-content {
+  flex: 1;
+}
+
+.moderne-dashboard-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.moderne-dashboard-title .moderne-highlight {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark .moderne-dashboard-title {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.moderne-dashboard-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+body.dark .moderne-dashboard-subtitle {
+  color: #94a3b8;
+}
+
+.moderne-header-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.moderne-header-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.moderne-header-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  color: #3b82f6;
+}
+
+body.dark .moderne-header-action-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.moderne-header-breadcrumbs {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Animation pour le header */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Supprimer l'ancien header */
+.moderne-header-card {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .moderne-stats-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .moderne-search-filter-container {
+      flex-direction: column;
+  }
+  
+  .moderne-search-container {
+      min-width: 100%;
+  }
+  
+  .moderne-filter-select {
+      min-width: 100%;
+  }
+  
+  .moderne-rapport-card2 {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .moderne-rapport-main {
+      flex-direction: column;
+      width: 100%;
+  }
+  
+  .moderne-rapport-type {
+      flex-direction: row;
+      justify-content: flex-start;
+      min-width: auto;
+      width: 100%;
+  }
+  
+  .moderne-rapport-actions {
+      width: 100%;
+      justify-content: flex-end;
+  }
+  
+  .moderne-modal-content {
+      margin: 1rem;
+  }
+  
+  .moderne-modal-footer {
+      flex-direction: column;
+  }
+  
+  .moderne-btn-primary, .moderne-btn-secondary {
+      width: 100%;
+      justify-content: center;
+  }
+
+  .moderne-administration-header {
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-top: -1.5em;
+  }
+  
+  .moderne-header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .moderne-header-text {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .moderne-btn-back-header {
+    align-self: center;
+  }
+  
+  .moderne-header-actions {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+  
+  .moderne-dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .moderne-header-breadcrumbs {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .moderne-rapports-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+  }
+  
+  .moderne-rapport-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+  
+  .moderne-financial-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .moderne-detail-grid {
+      grid-template-columns: 1fr;
+  }
+
+  .moderne-administration-header {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+  
+  .moderne-dashboard-title {
+    font-size: 1.75rem;
+  }
+  
+  .moderne-dashboard-subtitle {
+    font-size: 1rem;
+  }
+  
+  .moderne-header-action-btn {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .moderne-btn-back-header {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Animation pour les cartes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.moderne-rapport-card2 {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+/* Scrollbar personnalisé pour le modal */
+.moderne-modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.moderne-modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.moderne-modal-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.moderne-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+body.dark .moderne-modal-content::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+body.dark .moderne-modal-content::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+body.dark .moderne-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Classes utilitaires */
+.moderne-mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.moderne-w-100 {
+    width: 100% !important;
+}
+
+.moderne-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body.dark .moderne-card {
+    background: #1e293b;
+}
+
+.moderne-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.moderne-border-0 {
+    border: none !important;
+}
+
+.moderne-p-4 {
+    padding: 1.5rem !important;
+}
+
+.moderne-mt-4 {
+    margin-top: 1.5rem !important;
+}

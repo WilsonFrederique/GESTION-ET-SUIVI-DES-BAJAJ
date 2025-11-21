@@ -1155,7 +1155,7 @@ body.dark .finances-container .header-action-btn {
   .finances-container .finances-header {
     padding: 1.5rem;
     border-radius: 20px;
-    margin-top: 4em;
+    margin-top: -1.5em;
   }
   
   .finances-container .header-content {

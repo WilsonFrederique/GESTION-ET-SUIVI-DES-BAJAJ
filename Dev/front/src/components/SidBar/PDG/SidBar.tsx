@@ -106,7 +106,7 @@ const SidBar = () => {
                             <Link to="/">
                                 <Button className={`w-100 ${activeTab === 0 ? 'active' : ''}`} onClick={() => isOpenSubmenu(0)}>
                                     <span className='icon'><MdOutlineDashboard /></span>
-                                    Tableau de Bord 
+                                    Aperçu
                                     <span className='arrow'><FaAngleRight /></span>
                                 </Button>
                             </Link>
@@ -151,17 +151,6 @@ const SidBar = () => {
                                 <Button className={`w-100 ${activeTab === 4 ? 'active' : ''}`} onClick={() => isOpenSubmenu(4)}>
                                     <span className='icon'><FaUserCog /></span>
                                     Administration
-                                    <span className='arrow'><FaAngleRight /></span>
-                                </Button>
-                            </Link>
-                        </li>
-
-                        {/* Documentation */}
-                        <li>
-                            <Link to="/#">
-                                <Button className={`w-100 ${activeTab === 5 ? 'active' : ''}`} onClick={() => isOpenSubmenu(5)}>
-                                    <span className='icon'><FaFileAlt /></span>
-                                    Documentation
                                     <span className='arrow'><FaAngleRight /></span>
                                 </Button>
                             </Link>

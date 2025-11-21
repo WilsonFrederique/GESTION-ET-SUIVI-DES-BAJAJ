@@ -1,18 +1,19 @@
 import React, {useContext, useState} from 'react'
 
-import Logo from '../../assets/images/logo2.jpg'
+import Logo2 from '../../assets/images/logo1.png'
+import Logo1 from '../../assets/images/logo2.png'
 import Profil from '../../assets/images/Profil.png'
 
 import { Link } from 'react-router-dom'
 import SearachBox from '../SearachBox/SearachBox';
 import UserAvatarImg from '../userAvatarImg/UserAvatarImg';
+import { MdOutlineMailOutline } from "react-icons/md";
 
 import Button from '@mui/material/Button';
 
 import { MdMenuOpen } from "react-icons/md";
 import { MdOutlineMenu } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
-import { MdOutlineMailOutline } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 
@@ -31,7 +32,6 @@ const Header = () => {
     const [isOpenNotificationDrop, setisOpenNotificationDrop] = useState(false);
     const openMyAcc = Boolean(anchorEl);
     const openNotifications = Boolean(isOpenNotificationDrop);
-
 
     const context = useContext(MyContext)
 
@@ -55,15 +55,21 @@ const Header = () => {
                 <div className="container-fluid w-100">
                     <div className="row d-flex align-items-center w-100 ">
                         <div className="col-sm-2 part1">
-                            <Link to="/" className='d-flex align-items-center logoFID'>
-                                <img src={Logo} alt="Logo" />
-                                {/* <span className="ms-0 text-logo">BAJAJ</span> */}
-                            </Link>
+                            {/* Logo conditionnel basé sur le mode sombre/clair */}
+                            {context.themeMode ? (
+                                <Link to="/" className='d-flex align-items-center logoFID'>
+                                    <img src={Logo1} alt="Logo" />
+                                </Link>
+                            ) : (
+                                <Link to="/" className='d-flex align-items-center logoFID2'>
+                                    <img src={Logo2} alt="Logo" />
+                                </Link>
+                            )}
                         </div>
 
                         {/* Responsive */}
                         {
-                            context.windowWidth> 992 && 
+                            context.windowWidth > 992 && 
                                 <div className="col-sm-3 d-flex align-items-center part2 padding res-hide">
                                     <Button className='rounded-circle me-3' onClick={() => context.setIsToggleSidebar(!context.isToggleSidebar)}>
                                         {context.isToggleSidebar ? <MdMenuOpen /> : <MdOutlineMenu />}
@@ -73,7 +79,7 @@ const Header = () => {
                         }
 
                         <div className="col-sm-7 d-flex align-items-center justify-content-end part3 ps-1">
-                            <Button className="rounded-circle me-3" onClick={()=>context.setThemeMode(!context.themeMode)}> 
+                            <Button className="rounded-circle me-3" onClick={() => context.setThemeMode(!context.themeMode)}> 
                                 <MdOutlineLightMode /> 
                             </Button>
                             
