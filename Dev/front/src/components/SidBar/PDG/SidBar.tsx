@@ -103,7 +103,7 @@ const SidBar = () => {
                     <ul className="list-unstyled">
                         {/* Tableau de Bord */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/">
                                 <Button className={`w-100 ${activeTab === 0 ? 'active' : ''}`} onClick={() => isOpenSubmenu(0)}>
                                     <span className='icon'><MdOutlineDashboard /></span>
                                     Tableau de Bord 
@@ -114,7 +114,7 @@ const SidBar = () => {
                         
                         {/* Finances */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/finances">
                                 <Button className={`w-100 ${activeTab === 1 ? 'active' : ''}`} onClick={() => isOpenSubmenu(1)}>
                                     <span className='icon'><FaMoneyBillWave /></span>
                                     Finances
@@ -125,7 +125,7 @@ const SidBar = () => {
 
                         {/* Flotte */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/listeFlotte">
                                 <Button className={`w-100 ${activeTab === 2 ? 'active' : ''}`} onClick={() => isOpenSubmenu(2)}>
                                     <span className='icon'><FaCar /></span>
                                     Flotte
@@ -136,7 +136,7 @@ const SidBar = () => {
 
                         {/* Rapports */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/rapports">
                                 <Button className={`w-100 ${activeTab === 3 ? 'active' : ''}`} onClick={() => isOpenSubmenu(3)}>
                                     <span className='icon'><FaChartBar /></span>
                                     Rapports
@@ -147,7 +147,7 @@ const SidBar = () => {
 
                         {/* Administration */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/administrations">
                                 <Button className={`w-100 ${activeTab === 4 ? 'active' : ''}`} onClick={() => isOpenSubmenu(4)}>
                                     <span className='icon'><FaUserCog /></span>
                                     Administration
@@ -158,7 +158,7 @@ const SidBar = () => {
 
                         {/* Documentation */}
                         <li>
-                            <Link to="/home">
+                            <Link to="/#">
                                 <Button className={`w-100 ${activeTab === 5 ? 'active' : ''}`} onClick={() => isOpenSubmenu(5)}>
                                     <span className='icon'><FaFileAlt /></span>
                                     Documentation

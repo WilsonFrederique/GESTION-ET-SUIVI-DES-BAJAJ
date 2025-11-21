@@ -15,20 +15,22 @@ import {
   IoAlertCircleOutline,
   IoCheckmarkCircleOutline,
   IoPlayCircleOutline,
-  IoBusinessOutline,
-  IoCashOutline,
   IoCarSportOutline,
   IoDocumentsOutline,
   IoSettingsOutline,
   IoAnalyticsOutline,
   IoArrowUpOutline,
   IoArrowDownOutline,
-  IoStatsChartOutline,
   IoTrendingUpOutline,
   IoWalletOutline,
-  IoPieChartOutline
+  IoPieChartOutline,
+  IoFilterOutline,
+  IoNotificationsOutline,
+  IoMenuOutline,
+  IoShareSocialOutline
 } from "react-icons/io5";
-import { CiMoneyBill } from "react-icons/ci";
+import { CiMoneyBill, CiStreamOn } from "react-icons/ci";
+import { FaMotorcycle, FaChartLine, FaUsers, FaShieldAlt } from "react-icons/fa";
 import ScrollToTop from '../../Helper/ScrollToTop';
 import Footer from '../../Footer/Footer';
 import { Chip, emphasize, styled } from '@mui/material';
@@ -73,10 +75,19 @@ interface DashboardStats {
 interface RapportRecent {
   id: number;
   titre: string;
-  type: 'mensuel' | 'strategique' | 'compte_rendu';
+  type: 'mensuel' | 'strategique' | 'compte_rendu' | 'performance' | 'analytique';
   date: string;
-  statut: 'termine' | 'en_cours' | 'en_retard';
+  statut: 'termine' | 'en_cours' | 'en_retard' | 'nouveau';
   auteur: string;
+  priorite: 'basse' | 'moyenne' | 'haute';
+}
+
+interface PerformanceMetric {
+  label: string;
+  value: number;
+  trend: number;
+  target: number;
+  icon: React.ReactNode;
 }
 
 const Dashboard: React.FC = () => {
@@ -96,8 +107,10 @@ const Dashboard: React.FC = () => {
   });
 
   const [rapportsRecents, setRapportsRecents] = useState<RapportRecent[]>([]);
+  const [performanceMetrics, setPerformanceMetrics] = useState<PerformanceMetric[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [activeFilter, setActiveFilter] = useState<string>('all');
 
   // Données mock pour le dashboard transport
   useEffect(() => {
@@ -119,48 +132,85 @@ const Dashboard: React.FC = () => {
     const mockRapports: RapportRecent[] = [
       {
         id: 1,
-        titre: 'Rapport Mensuel Performance Flotte',
-        type: 'mensuel',
+        titre: 'Analyse Performance Flotte Q1 2024',
+        type: 'performance',
         date: '2024-03-15',
         statut: 'termine',
-        auteur: 'Directeur Général'
+        auteur: 'Directeur Général',
+        priorite: 'haute'
       },
       {
         id: 2,
-        titre: 'Analyse Stratégique Expansion Régionale',
+        titre: 'Stratégie Expansion Régionale Nord',
         type: 'strategique',
         date: '2024-03-10',
         statut: 'en_cours',
-        auteur: 'Comité Stratégique'
+        auteur: 'Comité Stratégique',
+        priorite: 'haute'
       },
       {
         id: 3,
-        titre: 'Compte Rendu Acquisition Véhicules',
+        titre: 'Rapport Acquisition Véhicules Mars',
         type: 'compte_rendu',
         date: '2024-03-08',
         statut: 'termine',
-        auteur: 'Directeur Flotte'
+        auteur: 'Directeur Flotte',
+        priorite: 'moyenne'
       },
       {
         id: 4,
-        titre: 'Rapport Financier Trimestriel',
-        type: 'mensuel',
+        titre: 'Analyse Données Clients Premium',
+        type: 'analytique',
         date: '2024-03-05',
-        statut: 'en_retard',
-        auteur: 'Directeur Financier'
+        statut: 'nouveau',
+        auteur: 'Data Analyst',
+        priorite: 'haute'
       },
       {
         id: 5,
-        titre: 'Plan d\'Investissement 2024-2025',
+        titre: 'Plan Investissement 2024-2025',
         type: 'strategique',
         date: '2024-03-01',
         statut: 'en_cours',
-        auteur: 'PDG'
+        auteur: 'PDG',
+        priorite: 'haute'
+      }
+    ];
+
+    const mockMetrics: PerformanceMetric[] = [
+      {
+        label: "Satisfaction Client",
+        value: 94,
+        trend: 2.1,
+        target: 95,
+        icon: <FaUsers />
+      },
+      {
+        label: "Efficacité Opérationnelle",
+        value: 88,
+        trend: 1.4,
+        target: 90,
+        icon: <CiStreamOn />
+      },
+      {
+        label: "Disponibilité Flotte",
+        value: 92,
+        trend: 0.8,
+        target: 95,
+        icon: <FaMotorcycle />
+      },
+      {
+        label: "Conformité Réglementaire",
+        value: 96,
+        trend: 1.2,
+        target: 98,
+        icon: <FaShieldAlt />
       }
     ];
 
     setStats(mockStats);
     setRapportsRecents(mockRapports);
+    setPerformanceMetrics(mockMetrics);
     setLoading(false);
   }, []);
 
@@ -184,9 +234,10 @@ const Dashboard: React.FC = () => {
 
   // Filtrage des rapports récents
   const rapportsFiltres = rapportsRecents.filter(rapport =>
-    rapport.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (rapport.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
     rapport.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    rapport.auteur.toLowerCase().includes(searchTerm.toLowerCase())
+    rapport.auteur.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (activeFilter === 'all' || rapport.statut === activeFilter)
   );
 
   // Composant de carte de statistique
@@ -198,37 +249,77 @@ const Dashboard: React.FC = () => {
     trend,
     suffix = '',
     prefix = '',
-    description = ''
+    description = '',
+    delay = 0
   }: {
     title: string;
     value: number | string;
     icon: React.ReactNode;
-    color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'accent' | 'purple';
+    color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'accent' | 'purple' | 'gradient';
     trend?: number;
     suffix?: string;
     prefix?: string;
     description?: string;
+    delay?: number;
   }) => (
-    <div className={`stat-card ${color}`}>
-      <div className="stat-header">
-        <div className="stat-icon-wrapper">
-          {icon}
+    <div 
+      className={`stat-card ${color}`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <div className="stat-background"></div>
+      <div className="stat-content-wrapper">
+        <div className="stat-header">
+          <div className="stat-icon-wrapper">
+            {icon}
+          </div>
+          <div className="stat-trend-indicator">
+            {trend !== undefined && (
+              <span className={`trend ${trend >= 0 ? 'positive' : 'negative'}`}>
+                {trend >= 0 ? <IoArrowUpOutline /> : <IoArrowDownOutline />}
+                {Math.abs(trend)}%
+              </span>
+            )}
+          </div>
         </div>
-        <div className="stat-trend-indicator">
-          {trend !== undefined && (
-            <span className={`trend ${trend >= 0 ? 'positive' : 'negative'}`}>
-              {trend >= 0 ? <IoArrowUpOutline /> : <IoArrowDownOutline />}
-              {Math.abs(trend)}%
-            </span>
-          )}
+        <div className="stat-content">
+          <div className="stat-value">
+            {prefix}{value}{suffix}
+          </div>
+          <div className="stat-title">{title}</div>
+          {description && <div className="stat-description">{description}</div>}
         </div>
       </div>
-      <div className="stat-content">
-        <div className="stat-value">
-          {prefix}{value}{suffix}
+    </div>
+  );
+
+  // Composant de métrique de performance
+  const PerformanceMetricCard = ({ metric, delay }: { metric: PerformanceMetric; delay: number }) => (
+    <div 
+      className="performance-metric-card"
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <div className="metric-header">
+        <div className="metric-icon">
+          {metric.icon}
         </div>
-        <div className="stat-title">{title}</div>
-        {description && <div className="stat-description">{description}</div>}
+        <div className="metric-stats">
+          <span className="metric-value">{metric.value}%</span>
+          <span className={`metric-trend ${metric.trend >= 0 ? 'positive' : 'negative'}`}>
+            {metric.trend >= 0 ? '+' : ''}{metric.trend}%
+          </span>
+        </div>
+      </div>
+      <div className="metric-content">
+        <h4 className="metric-label">{metric.label}</h4>
+        <div className="metric-progress">
+          <div 
+            className="progress-bar"
+            style={{ width: `${metric.value}%` }}
+          ></div>
+          <div className="progress-target">
+            <span>Cible: {metric.target}%</span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -249,24 +340,34 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-header">
           <div className="header-content">
             <div className="header-text">
-              <h1 className="dashboard-title">Tableau de Bord Stratégique</h1>
-              <p className="dashboard-subtitle">Vue d'ensemble complète des performances et indicateurs clés de votre entreprise</p>
+              <h1 className="dashboard-title">
+                Tableau de Bord <span className="highlight">Stratégique</span>
+              </h1>
+              <p className="dashboard-subtitle">
+                Vue d'ensemble en temps réel des performances et indicateurs clés de votre entreprise
+              </p>
             </div>
-            <div className="header-breadcrumbs">
-              <Breadcrumbs aria-label="breadcrumb">
-                <a href="/">
-                  <StyledBreadcrumb
-                    component="a"
-                    label="Accueil"
-                    icon={<HomeIcon fontSize="small" />}
-                  />
-                </a>
+            <div className="header-actions">
+              <button className="header-action-btn">
+                <IoMenuOutline />
+              </button>
+            </div>
+          </div>
+          
+          <div className="header-breadcrumbs">
+            <Breadcrumbs aria-label="breadcrumb">
+              <a href="/">
                 <StyledBreadcrumb
-                  label="Tableau de Bord PDG"
-                  icon={<ExpandMoreIcon fontSize="small" />}
+                  component="a"
+                  label="Accueil"
+                  icon={<HomeIcon fontSize="small" />}
                 />
-              </Breadcrumbs>
-            </div>
+              </a>
+              <StyledBreadcrumb
+                label="Tableau de Bord PDG"
+                icon={<ExpandMoreIcon fontSize="small" />}
+              />
+            </Breadcrumbs>
           </div>
         </div>
 
@@ -282,149 +383,122 @@ const Dashboard: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              <div className="search-actions">
+                <IoFilterOutline className="filter-icon" />
+              </div>
             </div>
           </div>
           <div className="actions-section">
             <button className="action-btn primary">
               <IoAddOutline />
-              Nouveau Rapport
+              <span>Nouveau Rapport</span>
             </button>
             <button className="action-btn secondary">
               <IoDownloadOutline />
-              Exporter
+              <span>Exporter</span>
             </button>
             <button className="action-btn secondary">
               <IoRefreshOutline />
-              Actualiser
+              <span>Actualiser</span>
             </button>
           </div>
         </div>
 
-        {/* 📊 Section Tableau de Bord Stratégique */}
-        <section className="dashboard-section">
-          <div className="section-header">
-            <IoAnalyticsOutline className="section-icon" />
-            <h2 className="section-title">Tableau de Bord Stratégique</h2>
-          </div>
-          <div className="stats-grid-2x2">
-            <StatCard
-              title="Rentabilité Globale"
-              value={stats.rentabiliteGlobale}
-              suffix="%"
-              icon={<IoPieChartOutline />}
-              color="success"
-              trend={2.4}
-              description="Croissance trimestrielle"
-            />
-            <StatCard
-              title="ROI par Bajaj"
-              value={stats.roiParBajaj}
-              suffix="%"
-              icon={<CiMoneyBill />}
-              color="primary"
-              trend={1.2}
-              description="Retour sur investissement"
-            />
-            <StatCard
-              title="Taux d'Expansion"
-              value={stats.tauxExpansion}
-              suffix="%"
-              icon={<IoTrendingUpOutline />}
-              color="accent"
-              trend={3.1}
-              description="Nouvelles zones couvertes"
-            />
-            <StatCard
-              title="Prévisions Financières"
-              value="+15%"
-              icon={<IoStatsChartOutline />}
-              color="info"
-              trend={15}
-              description="Projection annuelle"
-            />
-          </div>
-        </section>
+        {/* Filtres rapides */}
+        <div className="quick-filters">
+          <button 
+            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
+          >
+            Tous les rapports
+          </button>
+          <button 
+            className={`filter-btn ${activeFilter === 'nouveau' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('nouveau')}
+          >
+            Nouveaux
+          </button>
+          <button 
+            className={`filter-btn ${activeFilter === 'en_cours' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('en_cours')}
+          >
+            En cours
+          </button>
+          <button 
+            className={`filter-btn ${activeFilter === 'termine' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('termine')}
+          >
+            Terminés
+          </button>
+        </div>
 
-        {/* 💰 Section Finances */}
+        {/* 📊 Section KPI Principaux */}
         <section className="dashboard-section">
           <div className="section-header">
-            <IoCashOutline className="section-icon" />
-            <h2 className="section-title">Finances</h2>
+            <div className="section-title-wrapper">
+              <IoAnalyticsOutline className="section-icon" />
+              <h2 className="section-title">Indicateurs Clés de Performance</h2>
+            </div>
+            <div className="section-actions">
+              <button className="section-action-btn">
+                <IoShareSocialOutline />
+                Partager
+              </button>
+            </div>
           </div>
+          
+          {/* Grille 2x2 fixe */}
           <div className="stats-grid-2x2">
-            <StatCard
-              title="Bilan Global"
-              value={stats.bilanGlobal}
-              suffix="%"
-              icon={<IoCheckmarkCircleOutline />}
-              color="success"
-              description="Performance financière"
-            />
-            <StatCard
-              title="Trésorerie"
-              value={formatMontant(stats.tresorerie)}
-              icon={<IoWalletOutline />}
-              color="primary"
-              description="Disponibilités actuelles"
-            />
-            <StatCard
-              title="Investissements"
-              value={formatMontant(stats.investissements)}
-              icon={<IoBusinessOutline />}
-              color="info"
-              description="Capitaux engagés"
-            />
-            <StatCard
-              title="Marges Bénéficiaires"
-              value={stats.margesBeneficiaires}
-              suffix="%"
-              icon={<IoAnalyticsOutline />}
-              color="accent"
-              trend={1.8}
-              description="Profitabilité"
-            />
-          </div>
-        </section>
-
-        {/* 🚗 Section Flotte */}
-        <section className="dashboard-section">
-          <div className="section-header">
-            <IoCarSportOutline className="section-icon" />
-            <h2 className="section-title">Flotte</h2>
-          </div>
-          <div className="stats-grid-2x2">
-            <StatCard
-              title="Performance Véhicules"
-              value={stats.performanceVehicules}
-              suffix="%"
-              icon={<IoCarSportOutline />}
-              color="primary"
-              trend={2.3}
-              description="Efficacité opérationnelle"
-            />
-            <StatCard
-              title="Taux d'Utilisation"
-              value={stats.tauxUtilisation}
-              suffix="%"
-              icon={<IoTimeOutline />}
-              color="info"
-              trend={1.1}
-              description="Optimisation des ressources"
-            />
-            <StatCard
-              title="Acquisitions Planifiées"
-              value={stats.acquisitionsPlanifiees}
-              icon={<IoAddOutline />}
-              color="accent"
-              description="Nouveaux véhicules"
-            />
-            <StatCard
-              title="Maintenance"
-              value="92%"
-              icon={<IoSettingsOutline />}
-              color="success"
-              description="Taux de disponibilité"
-            />
+            <div className="grid-row">
+              <div className="grid-col">
+                <StatCard
+                  title="Rentabilité Globale"
+                  value={stats.rentabiliteGlobale}
+                  suffix="%"
+                  icon={<IoPieChartOutline />}
+                  color="gradient"
+                  trend={2.4}
+                  description="Croissance trimestrielle"
+                  delay={100}
+                />
+              </div>
+              <div className="grid-col">
+                <StatCard
+                  title="ROI par Bajaj"
+                  value={stats.roiParBajaj}
+                  suffix="%"
+                  icon={<CiMoneyBill />}
+                  color="primary"
+                  trend={1.2}
+                  description="Retour sur investissement"
+                  delay={200}
+                />
+              </div>
+            </div>
+            <div className="grid-row">
+              <div className="grid-col">
+                <StatCard
+                  title="Taux d'Expansion"
+                  value={stats.tauxExpansion}
+                  suffix="%"
+                  icon={<IoTrendingUpOutline />}
+                  color="accent"
+                  trend={3.1}
+                  description="Nouvelles zones couvertes"
+                  delay={300}
+                />
+              </div>
+              <div className="grid-col">
+                <StatCard
+                  title="Trésorerie"
+                  value={formatMontant(stats.tresorerie)}
+                  icon={<IoWalletOutline />}
+                  color="success"
+                  description="Disponibilités actuelles"
+                  delay={400}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -436,17 +510,26 @@ const Dashboard: React.FC = () => {
               <div className="card-header">
                 <div className="card-title-section">
                   <IoDocumentsOutline className="card-icon" />
-                  <h3 className="card-title">Rapports Récents</h3>
+                  <div>
+                    <h3 className="card-title">Rapports Récents</h3>
+                    <p className="card-subtitle">{rapportsFiltres.length} rapports trouvés</p>
+                  </div>
                 </div>
                 <button className="view-all-btn">
-                  Voir tout <IoEyeOutline />
+                  <span>Voir tout</span>
+                  <IoEyeOutline />
                 </button>
               </div>
               
               <div className="rapports-container">
                 {rapportsFiltres.length > 0 ? (
-                  rapportsFiltres.map(rapport => (
-                    <div key={rapport.id} className="rapport-card">
+                  rapportsFiltres.map((rapport, index) => (
+                    <div 
+                      key={rapport.id} 
+                      className="rapport-card"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="rapport-priority-indicator" data-priority={rapport.priorite}></div>
                       <div className="rapport-content">
                         <div className="rapport-header">
                           <h4 className="rapport-title">{rapport.titre}</h4>
@@ -454,20 +537,28 @@ const Dashboard: React.FC = () => {
                             {rapport.statut === 'termine' && <IoCheckmarkCircleOutline />}
                             {rapport.statut === 'en_cours' && <IoPlayCircleOutline />}
                             {rapport.statut === 'en_retard' && <IoAlertCircleOutline />}
+                            {rapport.statut === 'nouveau' && <IoNotificationsOutline />}
                             {rapport.statut.replace('_', ' ')}
                           </span>
                         </div>
                         <div className="rapport-meta">
-                          <span className="rapport-type">
+                          <span className={`rapport-type ${rapport.type}`}>
                             {rapport.type === 'mensuel' && '📊 Mensuel PDG'}
-                            {rapport.type === 'strategique' && '🎯 Analyse Stratégique'}
-                            {rapport.type === 'compte_rendu' && '📋 Compte Rendu DG'}
+                            {rapport.type === 'strategique' && '🎯 Stratégique'}
+                            {rapport.type === 'compte_rendu' && '📋 Compte Rendu'}
+                            {rapport.type === 'performance' && '📈 Performance'}
+                            {rapport.type === 'analytique' && '🔍 Analytique'}
                           </span>
                           <span className="rapport-author">Par {rapport.auteur}</span>
                         </div>
-                        <div className="rapport-date">
-                          <IoCalendarOutline />
-                          {formatDate(rapport.date)}
+                        <div className="rapport-footer">
+                          <div className="rapport-date">
+                            <IoCalendarOutline />
+                            {formatDate(rapport.date)}
+                          </div>
+                          <span className="rapport-priority" data-priority={rapport.priorite}>
+                            {rapport.priorite}
+                          </span>
                         </div>
                       </div>
                       <div className="rapport-actions">
@@ -482,121 +573,146 @@ const Dashboard: React.FC = () => {
                   ))
                 ) : (
                   <div className="no-results">
+                    <IoDocumentsOutline className="no-results-icon" />
                     <p>Aucun rapport trouvé pour votre recherche</p>
+                    <button className="action-btn primary">
+                      <IoAddOutline />
+                      Créer un nouveau rapport
+                    </button>
                   </div>
                 )}
               </div>
             </div>
           </div>
 
-          {/* ⚙️ Section Administration */}
+          {/* 📊 Section Métriques de Performance */}
           <div className="content-column sidebar-column">
             <div className="content-card">
               <div className="card-header">
                 <div className="card-title-section">
-                  <IoSettingsOutline className="card-icon" />
-                  <h3 className="card-title">Administration</h3>
+                  <FaChartLine className="card-icon" />
+                  <div>
+                    <h3 className="card-title">Performance</h3>
+                    <p className="card-subtitle">Indicateurs en temps réel</p>
+                  </div>
                 </div>
               </div>
               
-              <div className="admin-container">
-                <div className="admin-item">
-                  <div className="admin-icon warning">
-                    <IoDocumentsOutline />
-                  </div>
-                  <div className="admin-content">
-                    <p className="admin-title">{stats.validationsEnAttente} validations en attente</p>
-                    <p className="admin-subtitle">Stratégies nécessitant approbation</p>
-                    <span className="admin-badge urgent">Action requise</span>
-                  </div>
-                  <button className="admin-action-btn">
-                    Vérifier
-                  </button>
-                </div>
-
-                <div className="admin-item">
-                  <div className="admin-icon success">
-                    <IoCheckmarkCircleOutline />
-                  </div>
-                  <div className="admin-content">
-                    <p className="admin-title">{stats.budgetsApprouves} budgets approuvés</p>
-                    <p className="admin-subtitle">Ce mois</p>
-                    <span className="admin-badge">Dernière approbation: Aujourd'hui</span>
-                  </div>
-                  <button className="admin-action-btn outline">
-                    Détails
-                  </button>
-                </div>
-
-                <div className="admin-item">
-                  <div className="admin-icon info">
-                    <IoPeopleOutline />
-                  </div>
-                  <div className="admin-content">
-                    <p className="admin-title">Supervision DG</p>
-                    <p className="admin-subtitle">Réunion trimestrielle programmée</p>
-                    <span className="admin-badge">15 Mars 2024</span>
-                  </div>
-                  <button className="admin-action-btn">
-                    Planifier
-                  </button>
-                </div>
-
-                <div className="admin-item">
-                  <div className="admin-icon accent">
-                    <IoAnalyticsOutline />
-                  </div>
-                  <div className="admin-content">
-                    <p className="admin-title">Rapport de performance</p>
-                    <p className="admin-subtitle">DG à examiner</p>
-                    <span className="admin-badge warning">Échéance: 20 Mars</span>
-                  </div>
-                  <button className="admin-action-btn warning">
-                    Examiner
-                  </button>
-                </div>
+              <div className="performance-metrics">
+                {performanceMetrics.map((metric, index) => (
+                  <PerformanceMetricCard 
+                    key={index} 
+                    metric={metric} 
+                    delay={index * 150}
+                  />
+                ))}
               </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ⚙️ Section Actions Rapides */}
+        <div className="mb-5 content-card">
+          <div className="card-header">
+            <div className="card-title-section">
+              <IoSettingsOutline className="card-icon" />
+              <div>
+                <h3 className="card-title">Actions Rapides</h3>
+                <p className="card-subtitle">Tâches prioritaires</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="quick-actions">
+            <div className="quick-action-item">
+              <div className="action-icon warning">
+                <IoDocumentsOutline />
+              </div>
+              <div className="action-content">
+                <p className="action-title">{stats.validationsEnAttente} validations en attente</p>
+                <p className="action-subtitle">Documents à approuver</p>
+              </div>
+              <button className="action-button">
+                Vérifier
+              </button>
+            </div>
+
+            <div className="quick-action-item">
+              <div className="action-icon success">
+                <IoCheckmarkCircleOutline />
+              </div>
+              <div className="action-content">
+                <p className="action-title">{stats.budgetsApprouves} budgets approuvés</p>
+                <p className="action-subtitle">Ce mois-ci</p>
+              </div>
+              <button className="action-button outline">
+                Détails
+              </button>
+            </div>
+
+            <div className="quick-action-item">
+              <div className="action-icon info">
+                <IoPeopleOutline />
+              </div>
+              <div className="action-content">
+                <p className="action-title">Réunion stratégique</p>
+                <p className="action-subtitle">Dans 2 jours</p>
+              </div>
+              <button className="action-button">
+                Planifier
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Indicateurs de Performance */}
-        <section className="performance-section">
-          <div className="content-card">
-            <div className="section-header">
-              <IoAnalyticsOutline className="section-icon" />
-              <h2 className="section-title">Indicateurs de Performance Stratégiques</h2>
+        {/* 🚗 Section Performance Flotte */}
+        <section className="dashboard-section">
+          <div className="section-header">
+            <div className="section-title-wrapper">
+              <IoCarSportOutline className="section-icon" />
+              <h2 className="section-title">Performance Flotte</h2>
             </div>
-            <div className="performance-grid">
-              <div className="performance-item">
-                <div className="performance-value success">94%</div>
-                <div className="performance-label">Satisfaction Clients</div>
-                <div className="performance-trend positive">
-                  <IoArrowUpOutline /> +2.1%
-                </div>
-              </div>
-              <div className="performance-item">
-                <div className="performance-value primary">88%</div>
-                <div className="performance-label">Efficacité Opérationnelle</div>
-                <div className="performance-trend positive">
-                  <IoArrowUpOutline /> +1.4%
-                </div>
-              </div>
-              <div className="performance-item">
-                <div className="performance-value info">92%</div>
-                <div className="performance-label">Disponibilité Flotte</div>
-                <div className="performance-trend positive">
-                  <IoArrowUpOutline /> +0.8%
-                </div>
-              </div>
-              <div className="performance-item">
-                <div className="performance-value accent">96%</div>
-                <div className="performance-label">Conformité Réglementaire</div>
-                <div className="performance-trend positive">
-                  <IoArrowUpOutline /> +1.2%
-                </div>
-              </div>
-            </div>
+          </div>
+          
+          <div className="stats-grid-secondary">
+            <StatCard
+              title="Performance Véhicules"
+              value={stats.performanceVehicules}
+              suffix="%"
+              icon={<FaMotorcycle />}
+              color="primary"
+              trend={2.3}
+              description="Efficacité opérationnelle"
+              delay={100}
+            />
+            <StatCard
+              title="Taux d'Utilisation"
+              value={stats.tauxUtilisation}
+              suffix="%"
+              icon={<IoTimeOutline />}
+              color="info"
+              trend={1.1}
+              description="Optimisation des ressources"
+              delay={200}
+            />
+            <StatCard
+              title="Acquisitions Planifiées"
+              value={stats.acquisitionsPlanifiees}
+              icon={<IoAddOutline />}
+              color="accent"
+              description="Nouveaux véhicules"
+              delay={300}
+            />
+            <StatCard
+              title="Maintenance"
+              value="92%"
+              icon={<IoSettingsOutline />}
+              color="success"
+              trend={0.5}
+              description="Taux de disponibilité"
+              delay={400}
+            />
           </div>
         </section>
 

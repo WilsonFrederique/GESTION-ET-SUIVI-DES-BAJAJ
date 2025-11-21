@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 
-import Logo from '../../assets/images/logo2.png'
+import Logo from '../../assets/images/logo2.jpg'
 import Profil from '../../assets/images/Profil.png'
 
 import { Link } from 'react-router-dom'
@@ -57,7 +57,7 @@ const Header = () => {
                         <div className="col-sm-2 part1">
                             <Link to="/" className='d-flex align-items-center logoFID'>
                                 <img src={Logo} alt="Logo" />
-                                {/* <span className="ms-0 text-logo">FID</span> */}
+                                {/* <span className="ms-0 text-logo">BAJAJ</span> */}
                             </Link>
                         </div>
 

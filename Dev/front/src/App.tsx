@@ -8,21 +8,16 @@ import Home from "./pages/PDG/Dashboard/DashboardIndex";
 import Header from "./components/Header/Header";
 import SidBar from "./components/SidBar/PDG/SidBar";
 
-import ProjetListes from "./pages/PDG/Projets/ProjetListes";
-import FrmProjet from "./pages/PDG/Projets/FrmProjet";
-import DetailProjet from "./pages/PDG/Projets/DetailProjet";
+import ListeFinances from "./pages/PDG/Finances/ListeFinances";
 
-import BudgetVS from "./pages/PDG/Projets/BudgetVS";
-import DetailBudgetVS from "./pages/PDG/Projets/DetailBudgetVS";
+import ListeFlotte from "./pages/PDG/Flotte/ListeFlotte";
+
+import Rapports from "./pages/PDG/Rapports/Rapports";
+
+import Administrations from "./pages/PDG/Administrations/Administrations";
 
 import Utilisateurs from "./pages/PDG/Utilisateurs/Utilisateurs";
 import FrmUtilisateurs from "./pages/PDG/Utilisateurs/FrmUtilisateurs";
-
-import ListeDesPrestataires from "./pages/PDG/ListeDesPrestataires/ListeDesPrestataires";
-import FrmDesPrestataires from "./pages/PDG/ListeDesPrestataires/FrmDesPrestataires";
-import DetailPrestataires from "./pages/PDG/ListeDesPrestataires/DetailPrestataires";
-import EvaluationPrestataire from "./pages/PDG/ListeDesPrestataires/EvaluationPrestataire";
-import SuiviDesPrestataires from "./pages/PDG/ListeDesPrestataires/SuiviDesPrestataires";
 
 import Notifications from "./pages/PDG/Notifications/Notifications";
 
@@ -140,24 +135,17 @@ export default function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
 
-                    <Route path="/projetListes" element={<ProjetListes />} />
-                    <Route path="/frmProjet" element={<FrmProjet />} />
-                    <Route path="/modifier-projet/:id" element={<FrmProjet />} />
-                    <Route path="/projet/:id" element={<DetailProjet />} />
+                    <Route path="/finances" element={<ListeFinances />} />
 
-                    <Route path="/budgetVS" element={<BudgetVS />} />
-                    <Route path="/detailBudgetVS/:id" element={<DetailBudgetVS />} />
+                    <Route path="/listeFlotte" element={<ListeFlotte />} />
+
+                    <Route path="/rapports" element={<Rapports />} />
+
+                    <Route path="/administrations" element={<Administrations />} />
 
                     <Route path="/utilisateurs" element={<Utilisateurs />} />
                     <Route path="/frmUtilisateurs" element={<FrmUtilisateurs />} />
                     <Route path="/utilisateur/:id" element={<FrmUtilisateurs />} />
-
-                    <Route path="/listeDesPrestataires" element={<ListeDesPrestataires />} />
-                    <Route path="/frmDesPrestataires" element={<FrmDesPrestataires />} />
-                    <Route path="/modifier-prestataire/:id" element={<FrmDesPrestataires />} />
-                    <Route path="/prestataire/:id" element={<DetailPrestataires />} />
-                    <Route path="/evaluation-prestataire/:id" element={<EvaluationPrestataire />} />
-                    <Route path="/suiviDesPrestataires" element={<SuiviDesPrestataires />} />
 
                     <Route path="/notifications" element={<Notifications />} />
                   </Routes>
